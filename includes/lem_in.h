@@ -23,20 +23,20 @@ typedef struct	s_map
 	int			initialise;			// a part of validation
 }				t_map;
 
-void			count_ants(t_map *m, char *line);
+void			ant_counter(t_map *m, char *line);
 void			rooms(t_map *m, char *line);
 void			links(t_map *m, char *line);
 
-void			add_rooms(t_map *m);
-void			create_tab(t_map *m);
-int				solution(t_map *m, int i);
+void			room_adding(t_map *m);
+void			make_edge_table(t_map *m);
+int				algo(t_map *m, int i);
 
-char			*join_str(char *s1, char *s2, int clean);
+char			*joiner(char *s1, char *s2, int clean);
 void			free_array(char **array, t_map *m, int error);
 int				room_index(t_map *m, char *room_name, int start);
 
 void			result(t_map *m);
 void			print_matrix(t_map *m);
-void			exit_func(t_map *m, int error);
+void			leaveandfree(t_map *m, int error);
 
 #endif

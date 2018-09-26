@@ -43,16 +43,16 @@ static void		read_map(t_map *m)
 	while (get_next_line(m->fd, &line) > 0)
 	{
 		if (m->a_no == 0)
-			count_ants(m, line);
+			ant_counter(m, line);
 		else if (ft_strchr(line, '-') || m->begun == 3)
 			links(m, line);
 		else if ((m->begun == 1 || m->begun == 2) && !is_empty(line))
 			rooms(m, line);
 		else
-			exit_func(m, 1);
+			leaveandfree(m, 1);
 	}
 	if (!m->a_no || !m->e_list[0])
-		exit_func(m, 1);
+		leaveandfree(m, 1);
 	m = map_init_2(m);
 }
 
@@ -85,14 +85,14 @@ int				main(void)
 
 	m = map_init();
 	read_map(m);
-	add_rooms(m);
+	room_adding(m);
 	if (!m->valid[0] || !m->valid[1])
-		exit_func(m, 1);
-	create_tab(m);
+		leaveandfree(m, 1);
+	make_edge_table(m);
 	print_matrix(m);
-	if (solution(m, 0))
+	if (algo(m, 0))
 		result(m);
 	else
-		exit_func(m, 1);
-	exit_func(m, 0);
+		leaveandfree(m, 1);
+	leaveandfree(m, 0);
 }

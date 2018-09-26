@@ -6,7 +6,7 @@
 #    By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 12:57:38 by nmostert          #+#    #+#              #
-#    Updated: 2018/09/25 11:54:32 by nmostert         ###   ########.fr        #
+#    Updated: 2018/09/26 09:08:01 by nmostert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,18 @@ SRC_P = ./helpers/
 OBJ_P = ./objs/
 INC = ./includes/
 
-CFILES = add_rooms.c \
-count_ants.c \
-create_tab.c \
-exit_func.c \
+CFILES = room_adding.c \
+ant_counter.c \
+make_edge_table.c \
+leaveandfree.c \
 free_array.c \
-join_str.c \
+joiner.c \
 links.c \
 print_matrix.c \
 print_result.c \
 room_index.c \
 rooms.c \
-solution.c \
+algo.c \
 
 OBJ_N = $(CFILES:%.c=%.o)
 

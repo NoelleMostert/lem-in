@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rooms.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmostert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/26 13:17:22 by nmostert          #+#    #+#             */
+/*   Updated: 2018/09/26 13:17:26 by nmostert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lem_in.h"
 
 static void	is_number(char **r, t_map *m, char *s)
@@ -32,7 +44,7 @@ static void	validate_room(t_map *m, char *line)
 void		rooms(t_map *m, char *line)
 {
 	m->begun = 2;
-	m->r_list = join_str(m->r_list, line, 0);
+	m->r_list = joiner(m->r_list, line, 0);
 	if (line[0] == '#')
 		return ;
 	validate_room(m, line);
