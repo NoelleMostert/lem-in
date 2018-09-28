@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ant_counter.c                                      :+:      :+:    :+:   */
+/*   free2d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/26 13:15:24 by nmostert          #+#    #+#             */
-/*   Updated: 2018/09/27 14:23:26 by nmostert         ###   ########.fr       */
+/*   Created: 2018/08/26 11:17:20 by angonyam          #+#    #+#             */
+/*   Updated: 2018/09/27 14:11:29 by nmostert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <libft.h>
 
-void	ant_counter(t_map *f, char *line)
+void		free2d(char **array)
 {
 	int		i;
-	char	*s;
 
-	s = NULL;
 	i = 0;
-	f->begun = 1;
-	f->a_list = joiner(f->a_list, line, 0);
-	if (line[0] == '#')
+	while (array[i])
 	{
-		return ;
+		free(array[i]);
+		i++;
 	}
-	s = ft_strtrim(line);
-	if ((f->a_no = ft_atoi(s)) <= 0)
-	{
-		leaveandfree(f, 1);
-	}
-	while (s[i] != '\n' && s[i] != 0)
-	{
-		if (!ft_isdigit(s[i++]))
-			leaveandfree(f, 1);
-	}
-	free(s);
+	free(array);
 }

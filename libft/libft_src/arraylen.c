@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   arraylen.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmostert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: angonyam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 13:54:19 by nmostert          #+#    #+#             */
-/*   Updated: 2018/09/27 13:54:22 by nmostert         ###   ########.fr       */
+/*   Created: 2018/08/26 11:17:06 by angonyam          #+#    #+#             */
+/*   Updated: 2018/09/27 10:48:07 by angonyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1024
-# include "libft.h"
-# include <limits.h>
+#include <libft.h>
 
-int get_next_line(const int fd, char **line);
+size_t		arraylen(char **array)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
+}

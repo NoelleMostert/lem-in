@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_matrix.c                                     :+:      :+:    :+:   */
+/*   matrix_output.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmostert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/26 13:15:15 by nmostert          #+#    #+#             */
-/*   Updated: 2018/09/26 13:15:18 by nmostert         ###   ########.fr       */
+/*   Created: 2018/09/27 13:37:04 by nmostert          #+#    #+#             */
+/*   Updated: 2018/09/27 13:37:12 by nmostert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static void	header(t_map *m)
+static void	top(t_map *f)
 {
 	int i;
 
 	i = -1;
 	ft_putstr("\n\n");
 	ft_putstr("\t   ");
-	while (++i < m->r_no)
+	while (++i < f->r_no)
 	{
 		ft_putchar(' ');
 		ft_putnbr((i > 9) ? (i % 10) : i);
@@ -27,29 +27,29 @@ static void	header(t_map *m)
 	ft_putstr("\n\n");
 }
 
-void		print_matrix(t_map *m)
+void		matrix_output(t_map *f)
 {
 	int i;
 	int j;
 
-	header(m);
+	top(f);
 	i = -1;
-	while (++i < m->r_no)
+	while (++i < f->r_no)
 	{
 		ft_putchar('\t');
 		ft_putnbr((i > 9) ? (i % 10) : i);
 		ft_putstr("   ");
 		j = -1;
-		while (++j < m->r_no)
+		while (++j < f->r_no)
 		{
-			ft_putnbr(m->edgetable[i][j]);
+			ft_putnbr(f->edgetable[i][j]);
 			ft_putchar(' ');
 		}
 		ft_putstr("\t\t");
 		ft_putchar('[');
-		ft_putnbr(i);
+		ft_putnbr_clr(MAGENTA, i);
 		ft_putstr("] -  ");
-		ft_putendl(m->rooms[i]);
+		ft_putendl(f->rooms[i]);
 	}
 	ft_putstr("\n\n");
 }

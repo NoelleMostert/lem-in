@@ -6,7 +6,7 @@
 /*   By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 10:44:33 by nmostert          #+#    #+#             */
-/*   Updated: 2018/09/25 13:47:42 by nmostert         ###   ########.fr       */
+/*   Updated: 2018/09/27 13:03:30 by nmostert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "colours.h"
+# define ABS(Value) (Value * ((Value > 0) - (Value < 0)))
 
 typedef struct	s_list
 {
@@ -23,6 +24,15 @@ typedef struct	s_list
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+
+size_t			arraylen(char **array);
+char			**split(char *str, char c);
+void			free_and_null(char **str);
+char			**arraypush(char **array, char *str);
+char			*charpush(char *str, char c);
+void			free2d(char **array);
+
+void			ft_putnbr_clr(char const *clr, int n);
 
 int				ft_isupper(int c);
 int				ft_islower(int c);
@@ -72,7 +82,7 @@ char			*ft_lastdigits(char *str);
 char			*ft_secondword(char *str);
 char			*ft_strdup(const char *s1);
 char			*ft_itoa(int n);
-char			**ft_strsplit(char const *s, char c);
+char			**ft_strsplit(char *s, char c);
 char			*ft_strtrim(char const *s);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);

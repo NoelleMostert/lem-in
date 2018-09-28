@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   arraypush.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 12:26:04 by ashulha           #+#    #+#             */
-/*   Updated: 2018/09/27 14:12:49 by nmostert         ###   ########.fr       */
+/*   Created: 2018/08/26 11:17:11 by angonyam          #+#    #+#             */
+/*   Updated: 2018/09/27 14:11:01 by nmostert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	*ft_strdup(const char *s1)
+char		**arraypush(char **array, char *str)
 {
-	int		i;
-	char	*s2;
+	char	**newarr;
+	size_t	i;
 
 	i = 0;
-	s2 = (char*)malloc(sizeof(char) * ft_strlen(s1) + 1);
-	if (s2 == NULL)
-		return (NULL);
-	if (s1[0] == '\0')
+	if (array == NULL)
 	{
-		s2[0] = '\0';
-		return (s2);
+		newarr = (char**)malloc(sizeof(char*) * 2);
+		newarr[0] = ft_strdup(str);
+		newarr[1] = NULL;
 	}
-	while (s1[i] != '\0')
+	else
 	{
-		s2[i] = s1[i];
-		i++;
+		newarr = (char **)malloc(sizeof(char*) * (arraylen(array) + 2));
+		while (array[i])
+		{
+			newarr[i] = ft_strdup(array[i]);
+			i++;
+		}
+		newarr[i] = ft_strdup(str);
+		newarr[++i] = NULL;
+		free2d(array);
 	}
-	s2[i] = '\0';
-	return (s2);
+	return (newarr);
 }

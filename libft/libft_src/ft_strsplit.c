@@ -6,7 +6,7 @@
 /*   By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 11:08:22 by nmostert          #+#    #+#             */
-/*   Updated: 2018/09/25 13:54:29 by nmostert         ###   ########.fr       */
+/*   Updated: 2018/09/27 14:13:48 by nmostert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	**ft_buidar(char const *s, char c, char **ar_str)
 	return (ar_str);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char		**ft_strsplit(char *s, char c)
 {
 	char	**ar_str;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/27 14:25:09 by nmostert          #+#    #+#             */
+/*   Updated: 2018/09/27 15:19:48 by nmostert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lem_in.h"
 
 static int		is_empty(char *s)
@@ -12,87 +24,96 @@ static int		is_empty(char *s)
 	return (0);
 }
 
-static t_map	*map_init_2(t_map *m)
+static t_map	*initialise_map_cont(t_map *f)
 {
 	int i;
 	int j;
 
 	i = -1;
-	m->initialise = 1;
-	m->pathing = (int*)ft_memalloc(sizeof(int) * 1000);
-	m->edgetable = (int**)ft_memalloc(sizeof(int*) * m->r_no);
-	m->rooms = (char**)ft_memalloc(sizeof(char*) * (m->r_no + 1));
-	while (++i < m->r_no)
+	f->initialise = 1;
+	f->pathing = (int*)ft_memalloc(sizeof(int) * 1000);
+	f->edgetable = (int**)ft_memalloc(sizeof(int*) * f->r_no);
+	f->rooms = (char**)ft_memalloc(sizeof(char*) * (f->r_no + 1));
+	while (++i < f->r_no)
 	{
-		m->pathing[i] = -1;
-		m->rooms[i] = NULL;
-		m->edgetable[i] = (int*)ft_memalloc(sizeof(int) * m->r_no);
+		f->pathing[i] = -1;
+		f->rooms[i] = NULL;
+		f->edgetable[i] = (int*)ft_memalloc(sizeof(int) * f->r_no);
 		j = -1;
-		while (m->edgetable[i][++j])
-			m->edgetable[i][j] = 0;
+		while (f->edgetable[i][++j])
+			f->edgetable[i][j] = 0;
 	}
-	m->rooms[i] = NULL;
-	m->pathing[0] = 0;
-	return (m);
+	f->rooms[i] = NULL;
+	f->pathing[0] = 0;
+	return (f);
 }
 
-static void		read_map(t_map *m)
+static void		read_map(t_map *f)
 {
 	char *line;
 
-	while (get_next_line(m->fd, &line) > 0)
+	while (get_next_line(f->fd, &line) > 0)
 	{
-		if (m->a_no == 0)
-			ant_counter(m, line);
-		else if (ft_strchr(line, '-') || m->begun == 3)
-			links(m, line);
-		else if ((m->begun == 1 || m->begun == 2) && !is_empty(line))
-			rooms(m, line);
+		if (f->a_no == 0)
+		{
+			ant_counter(f, line);
+			free(line);
+		}
+		else if (ft_strchr(line, '-') || f->begun == 3)
+		{
+			links(f, line);
+			free(line);
+		}
+		else if ((f->begun == 1 || f->begun == 2) && !is_empty(line))
+		{
+			rooms(f, line);
+			free(line);
+		}
 		else
-			leaveandfree(m, 1);
+			leaveandfree(f, 1);
 	}
-	if (!m->a_no || !m->e_list[0])
-		leaveandfree(m, 1);
-	m = map_init_2(m);
+	line ? free(line) : 0;
+	(!f->a_no || !f->e_list[0]) ? leaveandfree(f, 1) : 0;
+	f = initialise_map_cont(f);
 }
 
-static t_map	*map_init(void)
+static t_map	*initialise_map(void)
 {
-	t_map *m;
+	t_map *f;
 
-	m = (t_map*)ft_memalloc(sizeof(t_map));
-	m->e_list = ft_strnew(1);
-	m->a_list = ft_strnew(1);
-	m->r_list = ft_strnew(1);
-	m->r_no = 0;
-	m->a_no = 0;
-	m->begun = 0;
-	m->room_index = 0;
-	m->path_index = 0;
-	m->initialise = 0;
-	m->valid[0] = 0;
-	m->valid[1] = 0;
-	m->rooms = NULL;
-	m->edgetable = NULL;
-	m->pathing = NULL;
-	m->fd = 0;
-	return (m);
+	f = (t_map*)ft_memalloc(sizeof(t_map));
+	f->e_list = ft_strnew(1);
+	f->a_list = ft_strnew(1);
+	f->r_list = ft_strnew(1);
+	f->r_no = 0;
+	f->a_no = 0;
+	f->begun = 0;
+	f->room_index = 0;
+	f->path_index = 0;
+	f->initialise = 0;
+	f->valid[0] = 0;
+	f->valid[1] = 0;
+	f->rooms = NULL;
+	f->edgetable = NULL;
+	f->pathing = NULL;
+	f->fd = 0;
+	return (f);
 }
 
 int				main(void)
 {
-	t_map *m;
+	t_map *f;
 
-	m = map_init();
-	read_map(m);
-	room_adding(m);
-	if (!m->valid[0] || !m->valid[1])
-		leaveandfree(m, 1);
-	make_edge_table(m);
-	print_matrix(m);
-	if (algo(m, 0))
-		result(m);
+	f = initialise_map();
+	read_map(f);
+	room_adding(f);
+	if (!f->valid[0] || !f->valid[1])
+		leaveandfree(f, 1);
+	make_edge_table(f);
+	matrix_output(f);
+	if (algo(f, 0))
+		result(f);
 	else
-		leaveandfree(m, 1);
-	leaveandfree(m, 0);
+		leaveandfree(f, 1);
+	leaveandfree(f, 0);
 }

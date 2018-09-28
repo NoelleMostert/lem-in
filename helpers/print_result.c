@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmostert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 13:15:07 by nmostert          #+#    #+#             */
-/*   Updated: 2018/09/26 13:15:10 by nmostert         ###   ########.fr       */
+/*   Updated: 2018/09/27 13:14:10 by nmostert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	print_ant(int ant, char *room)
 {
-	ft_putchar('L');
-	ft_putnbr(ant);
-	ft_putchar('-');
-	ft_putstr(room);
+	ft_putstr_clr(GREEN, "L");
+	ft_putnbr_clr(GREEN, ant);
+	ft_putstr_clr(MAGENTA, "-");
+	ft_putstr_clr(CYAN, room);
 	ft_putchar(' ');
 }
 
@@ -49,7 +49,7 @@ void		result(t_map *m)
 	while (++i <= m->path_index)
 	{
 		ft_putchar('[');
-		ft_putnbr(m->pathing[i]);
+		ft_putnbr_clr(MAGENTA, m->pathing[i]);
 		ft_putchar(']');
 		if (i != m->path_index)
 			ft_putchar('-');

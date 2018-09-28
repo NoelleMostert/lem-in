@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ant_counter.c                                      :+:      :+:    :+:   */
+/*   charpush.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/26 13:15:24 by nmostert          #+#    #+#             */
-/*   Updated: 2018/09/27 14:23:26 by nmostert         ###   ########.fr       */
+/*   Created: 2018/08/26 11:17:15 by angonyam          #+#    #+#             */
+/*   Updated: 2018/09/27 14:11:13 by nmostert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <libft.h>
 
-void	ant_counter(t_map *f, char *line)
+char	*charpush(char *str, char c)
 {
 	int		i;
-	char	*s;
+	char	*new;
 
-	s = NULL;
 	i = 0;
-	f->begun = 1;
-	f->a_list = joiner(f->a_list, line, 0);
-	if (line[0] == '#')
+	if (str == NULL)
 	{
-		return ;
+		new = (char*)malloc(sizeof(char) * 2);
+		new[0] = c;
+		new[1] = '\0';
 	}
-	s = ft_strtrim(line);
-	if ((f->a_no = ft_atoi(s)) <= 0)
+	else
 	{
-		leaveandfree(f, 1);
+		new = (char*)malloc(sizeof(char) * ft_strlen(str) + 2);
+		while (str[i])
+		{
+			new[i] = str[i];
+			i++;
+		}
+		new[i] = c;
+		new[++i] = '\0';
+		free(str);
 	}
-	while (s[i] != '\n' && s[i] != 0)
-	{
-		if (!ft_isdigit(s[i++]))
-			leaveandfree(f, 1);
-	}
-	free(s);
+	return (new);
 }

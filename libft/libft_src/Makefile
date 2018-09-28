@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmostert <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: nmostert <nmostert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/30 10:52:24 by nmostert          #+#    #+#              #
-#    Updated: 2018/09/04 09:36:28 by nmostert         ###   ########.fr        #
+#    Updated: 2018/09/27 13:04:08 by nmostert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,13 @@ SRC_NAME=ft_atoi.c \
 		ft_containsrow.c \
 		ft_strsplit_word.c \
 		ft_lstnew.c \
+		split.c \
+		charpush.c \
+		arraypush.c \
+		arraylen.c \
+		free_and_null.c \
+		free2d.c \
+		ft_putnbr_clr.c \
 
 FLAGS= -Wall -Werror -Wextra
 OBJ = $(SRC_NAME:%.c=%.o)

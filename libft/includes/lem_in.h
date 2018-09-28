@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmostert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/27 13:54:33 by nmostert          #+#    #+#             */
+/*   Updated: 2018/09/27 13:54:36 by nmostert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # include "libft.h"
@@ -7,20 +19,20 @@
 
 typedef struct	s_map
 {
-	char		**rooms;		// array of room names
-	char		*r_list;	// list of rooms that was passed at the beginning
-	char		*a_list; //*ants_str;		// list of ants that was passed at the beginning
-	char		*e_list; //*links;			// list of links that was passed at the beginning
-	int			r_no; //q_rooms;		// quantity of rooms
-	int			a_no; //ants;			// quantity of ants
-	int			begun; //started;		// a part of validation
-	int			room_index; //curr_room;		// an index of current room we're in
-	int			path_index;			// last path index, current size of path
-	int			*pathing;			// path
-	int			**edgetable;			// edge table
-	int			valid[2];		// a part of validation
-	int			fd;		// a part of validation
-	int			initialise;			// a part of validation
+	char		**rooms;
+	char		*r_list;
+	char		*a_list;
+	char		*e_list;
+	int			r_no;
+	int			a_no;
+	int			begun;
+	int			room_index;
+	int			path_index;
+	int			*pathing;
+	int			**edgetable;
+	int			valid[2];
+	int			fd;
+	int			initialise;
 }				t_map;
 
 void			ant_counter(t_map *m, char *line);
@@ -36,7 +48,7 @@ void			free_array(char **array, t_map *m, int error);
 int				room_index(t_map *m, char *room_name, int start);
 
 void			result(t_map *m);
-void			print_matrix(t_map *m);
+void			matrix_output(t_map *m);
 void			leaveandfree(t_map *m, int error);
 
 #endif
